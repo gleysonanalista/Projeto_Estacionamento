@@ -49,7 +49,7 @@ public class EstacionamentoController {
          return ResponseEntity.status(HttpStatus.OK).body(estacionamentoService.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // novo serviço
     public ResponseEntity<Object> getOneVagasEstacionamento(@PathVariable(value= "id") UUID id){
         Optional<EstacionamentoModel> estacionamentoModelOptional = estacionamentoService.findById(id);
 
