@@ -27,7 +27,7 @@ public class EstacionamentoController {
         this.estacionamentoService = estacionamentoService;
     }
 
-    @PostMapping
+    @PostMapping /*Serviço de salvamento do registro*/
     public ResponseEntity<Object> salvarEstacionamento(@RequestBody @Valid EstacionamentoDto estacionamentoDto){
 
         if(estacionamentoService.existsByLicensePlateCar(estacionamentoDto.getLicensePlateCar())){
@@ -49,7 +49,7 @@ public class EstacionamentoController {
          return ResponseEntity.status(HttpStatus.OK).body(estacionamentoService.findAll());
     }
 
-    @GetMapping("/{id}") // novo serviço
+    @GetMapping("/{id}") /*Serviço de listagem dos registros*/
     public ResponseEntity<Object> getOneVagasEstacionamento(@PathVariable(value= "id") UUID id){
         Optional<EstacionamentoModel> estacionamentoModelOptional = estacionamentoService.findById(id);
 
@@ -59,7 +59,7 @@ public class EstacionamentoController {
         return ResponseEntity.status(HttpStatus.OK).body(estacionamentoModelOptional.get());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") /*Serviço de deleção*/
     public ResponseEntity<Object> deleteVagaEstacionamentoId(@PathVariable(value= "id") UUID id){
         Optional<EstacionamentoModel> estacionamentoModelOptional = estacionamentoService.findById(id);
 
@@ -70,7 +70,7 @@ public class EstacionamentoController {
         return ResponseEntity.status(HttpStatus.OK).body("Vaga removida com sucesso!!");
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")/*Serviço de atualização*/
     public ResponseEntity<Object> updateParkingSpot(@PathVariable(value= "id") UUID id,
                                                     @RequestBody @Valid EstacionamentoDto estacionamentoDto){
         Optional<EstacionamentoModel> estacionamentoModelOptional = estacionamentoService.findById(id);
