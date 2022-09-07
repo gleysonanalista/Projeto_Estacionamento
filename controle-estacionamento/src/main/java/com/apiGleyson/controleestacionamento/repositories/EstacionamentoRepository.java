@@ -13,8 +13,7 @@ import java.util.UUID;
 public interface EstacionamentoRepository extends JpaRepository<EstacionamentoModel, UUID> {
 
     boolean existsByLicensePlateCar(String licensePlateCar);
+    boolean existsByBlockAndApartment(String block, String apartment);
     boolean existsByParkingSpotNumber(String parkingSpotNumber);
     Page<EstacionamentoModel> findAll(Pageable pageable);
-
-
 }

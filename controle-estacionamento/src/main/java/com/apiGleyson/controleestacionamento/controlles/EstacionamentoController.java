@@ -38,6 +38,10 @@ public class EstacionamentoController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("O estacionamento já está em uso");
         }
 
+        if(estacionamentoService.existsByBlockAndApartment(estacionamentoDto.getBlock(), estacionamentoDto.getApartment())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("O Bloco e apartamento já estão cadastrados");
+        }
+
         var estacionamentoModelo = new EstacionamentoModel();
         BeanUtils.copyProperties(estacionamentoDto, estacionamentoModelo);
         estacionamentoModelo.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
@@ -53,7 +57,7 @@ public class EstacionamentoController {
     public ResponseEntity<Object> getOneVagasEstacionamento(@PathVariable(value= "id") UUID id){
         Optional<EstacionamentoModel> estacionamentoModelOptional = estacionamentoService.findById(id);
 
-        if(!estacionamentoModelOptional.isPresent()){
+        if(estacionamentoModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A vaga de estacionamento não existe.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(estacionamentoModelOptional.get());
@@ -63,7 +67,7 @@ public class EstacionamentoController {
     public ResponseEntity<Object> deleteVagaEstacionamentoId(@PathVariable(value= "id") UUID id){
         Optional<EstacionamentoModel> estacionamentoModelOptional = estacionamentoService.findById(id);
 
-        if(!estacionamentoModelOptional.isPresent()){
+        if(estacionamentoModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A vaga de estacionamento não existe.");
     }
         estacionamentoService.delete(estacionamentoModelOptional.get());
@@ -75,7 +79,7 @@ public class EstacionamentoController {
                                                     @RequestBody @Valid EstacionamentoDto estacionamentoDto){
         Optional<EstacionamentoModel> estacionamentoModelOptional = estacionamentoService.findById(id);
 
-        if(!estacionamentoModelOptional.isPresent()){
+        if(estacionamentoModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A vaga de estacionamento não encontrada.");
         }
         var estacionamentoModelo = new EstacionamentoModel();

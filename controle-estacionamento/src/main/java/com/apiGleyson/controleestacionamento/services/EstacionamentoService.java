@@ -23,6 +23,11 @@ public class EstacionamentoService {
         return estacionamentoRepository.save(estacionamentoModelo);
     }
 
+    @Transactional
+    public void delete(EstacionamentoModel estacionamentoModel) {
+        estacionamentoRepository.delete(estacionamentoModel);
+    }
+
     public boolean existsByLicensePlateCar(String licensePlateCar) {
         return estacionamentoRepository.existsByLicensePlateCar(licensePlateCar);
     }
@@ -38,12 +43,8 @@ public class EstacionamentoService {
     public Optional<EstacionamentoModel> findById(UUID id) {
         return estacionamentoRepository.findById(id);
     }
-    @Transactional
-    public void delete(EstacionamentoModel estacionamentoModel) {
-        estacionamentoRepository.delete(estacionamentoModel);
-    }
 
-   /* public boolean existsByApartamentAndBlock(String apartment, String block) {
-        return estacionamentoRepository.existsByApartamentAndBlock(apartment , block);
-    }*/
+    public boolean existsByBlockAndApartment(String block, String apartment) {
+        return estacionamentoRepository.existsByBlockAndApartment(block, apartment);
+    }
 }
