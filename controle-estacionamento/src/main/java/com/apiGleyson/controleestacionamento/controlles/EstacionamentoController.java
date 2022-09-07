@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@RestController
+@RestController/* Classe de Controle - Criação dos Endpoints - Padrão MVC*/
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/estacionamento")
 public class EstacionamentoController {

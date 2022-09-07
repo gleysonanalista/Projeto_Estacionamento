@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-@Repository
+@Repository /* Interface Repositório - Padrão MVC*/
 public interface EstacionamentoRepository extends JpaRepository<EstacionamentoModel, UUID> {
 
     boolean existsByLicensePlateCar(String licensePlateCar);
