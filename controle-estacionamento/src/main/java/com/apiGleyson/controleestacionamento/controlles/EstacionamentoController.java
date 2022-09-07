@@ -65,7 +65,7 @@ public class EstacionamentoController {
 
         if(!estacionamentoModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A vaga de estacionamento não existe.");
-        }
+    }
         estacionamentoService.delete(estacionamentoModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Vaga removida com sucesso!!");
     }
@@ -74,6 +74,7 @@ public class EstacionamentoController {
     public ResponseEntity<Object> updateParkingSpot(@PathVariable(value= "id") UUID id,
                                                     @RequestBody @Valid EstacionamentoDto estacionamentoDto){
         Optional<EstacionamentoModel> estacionamentoModelOptional = estacionamentoService.findById(id);
+
         if(!estacionamentoModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A vaga de estacionamento não encontrada.");
         }
